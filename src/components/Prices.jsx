@@ -151,6 +151,7 @@ function Prices() {
     )
   }
 
+  return (
     <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
       <div className="mx-auto max-w-6xl">
         <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-emerald-300">
