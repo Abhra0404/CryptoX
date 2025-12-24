@@ -7,6 +7,7 @@ import Prices from './components/Prices'
 import Glossary from './components/Glossary'
 import Quiz from './components/Quiz'
 import Footer from './components/Footer'
+import InstallPrompt from './components/InstallPrompt'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <InstallPrompt />
     </div>
   )
 }
