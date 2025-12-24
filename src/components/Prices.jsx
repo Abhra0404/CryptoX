@@ -151,35 +151,21 @@ function Prices() {
     )
   }
 
-  if (error) {
-    return (
-      <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
-        <div className="mx-auto max-w-6xl">
-          <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-emerald-300">
-            <span className="text-xl">←</span>
-            <span className="text-sm font-medium">Back to Home</span>
-          </Link>
-          <div className="mb-8">
-            <p className="text-sm uppercase tracking-[0.16em] text-emerald-200">📈 Market pulse</p>
-            <h2 className="mt-2 text-4xl font-bold">Live Crypto Prices</h2>
-          </div>
-          <div className="mb-6 rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent p-4">
-            <p className="text-sm text-slate-300">
-              ℹ️ <span className="font-semibold text-blue-200">{error}</span>
-            </p>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  return (
     <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
       <div className="mx-auto max-w-6xl">
         <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-emerald-300">
           <span className="text-xl">←</span>
           <span className="text-sm font-medium">Back to Home</span>
         </Link>
+
+        {error && (
+          <div className="mb-6 rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent p-4">
+            <p className="text-sm text-slate-300">
+              ℹ️ <span className="font-semibold text-blue-200">{error}</span>
+            </p>
+          </div>
+        )}
+
         <div className="mb-8">
           <p className="text-sm uppercase tracking-[0.16em] text-emerald-200">📈 Market pulse</p>
           <h2 className="mt-2 text-4xl font-bold">Live Crypto Prices</h2>
