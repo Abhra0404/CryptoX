@@ -14,6 +14,19 @@ body {
   background-color: #040815;
   color: #e5e7eb;
 }
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -25,8 +38,121 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animation Utilities */
 @layer utilities {
+  .animate-fadeInUp {
+    animation: fadeInUp 0.4s ease-out forwards;
+  }
+  
   .animate-fadeInDown {
-    animation: fadeInDown 0.3s ease-out;
+    animation: fadeInDown 0.3s ease-out forwards;
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+  
+  .animate-slideDown {
+    animation: slideDown 0.3s ease-out forwards;
+  }
+  
+  .animate-scaleIn {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+  
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animate-delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Stagger */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.stagger-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .reveal,
+  .stagger-item {
+    opacity: 1;
+    transform: none;
   }
 }

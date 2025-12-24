@@ -1,31 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
 
 // Intersection observer hook that returns a ref and a visibility flag
-function useScrollAnimation({ className = 'animate-in', threshold = 0.2 } = {}) {
+function useScrollAnimation({ threshold = 0.15, rootMargin = '0px' } = {}) {
   const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const el = ref.current
-    if (!el || !('IntersectionObserver' in window)) return
+    const element = ref.current
+    if (!element || !('IntersectionObserver' in window)) {
+      setIsVisible(true) // Fallback for no IntersectionObserver support
+      return
+    }
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add(className)
-            setVisible(true)
-          }
-        })
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true)
+          observer.unobserve(element) // Only trigger once
+        }
       },
-      { threshold },
+      { threshold, rootMargin }
     )
 
-    observer.observe(el)
+    observer.observe(element)
     return () => observer.disconnect()
-  }, [className, threshold])
+  }, [threshold, rootMargin, isVisible])
 
-  return [ref, visible]
+  return [ref, isVisible]
 }
 
 export default useScrollAnimation

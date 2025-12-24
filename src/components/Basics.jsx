@@ -1,9 +1,13 @@
 import basicsContent from '../data/basicsContent'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import useScrollAnimation from '../hooks/useScrollAnimation'
 
 function Basics() {
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [headerRef, headerVisible] = useScrollAnimation()
+  const [cardsRef, cardsVisible] = useScrollAnimation()
+  
   const categories = ['All', 'Foundations', 'Networks', 'Trading', 'Security', 'DeFi', 'NFTs']
   
   const filteredContent = selectedCategory === 'All' 
@@ -67,11 +71,14 @@ function Basics() {
         </div>
 
         {/* Lessons Grid */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div ref={cardsRef} className="grid gap-6 md:grid-cols-2">
           {filteredContent.map((item, idx) => (
             <article 
               key={idx} 
-              className="group rounded-2xl border border-white/10 bg-slate-900/60 p-6 transition hover:border-emerald-400/40 hover:shadow-lg hover:shadow-emerald-500/10"
+              className={`group rounded-2xl border border-white/10 bg-slate-900/60 p-6 transition-all duration-300 hover:border-emerald-400/40 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-1 ${
+                cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${idx * 50}ms` }}
             >
               <div className="mb-3 flex items-start justify-between">
                 <p className="text-xs uppercase tracking-[0.12em] text-emerald-200">{item.category}</p>

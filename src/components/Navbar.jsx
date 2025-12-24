@@ -1,8 +1,18 @@
 import { NavLink, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const toggleMenu = () => setIsOpen(!isOpen)
 
@@ -16,7 +26,11 @@ function Navbar() {
   ]
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/70 backdrop-blur">
+    <header className={`sticky top-0 z-40 border-b transition-all duration-300 ${
+      scrolled 
+        ? 'border-white/20 bg-slate-950/95 backdrop-blur-xl shadow-lg shadow-black/10' 
+        : 'border-white/10 bg-slate-950/70 backdrop-blur'
+    }`}>
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <div className="flex items-center gap-3">
           {/* Mobile Hamburger Button - Left Side */}
@@ -86,7 +100,7 @@ function Navbar() {
               <NavLink 
                 key={item.path}
                 to={item.path} 
-                className={({ isActive }) => `transition hover:text-white ${isActive ? 'text-white font-semibold' : ''}`}
+                className={({ isActive }) => `transition-all duration-200 hover:text-white hover:scale-105 ${isActive ? 'text-white font-semibold' : ''}`}
               >
                 {item.name}
               </NavLink>
