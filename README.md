@@ -1,4 +1,4 @@
-<h1>
+<h1 align="center">
   <img 
     src="https://raw.githubusercontent.com/Abhra0404/CryptoX/main/public/favicon.svg" 
     alt="CryptoX Logo" 
@@ -8,18 +8,17 @@
   CryptoX
 </h1>
 
-
-
-<p>
+<p align="center">
   <strong>Learn Crypto the Right Way.</strong><br/>
   A premium, beginner-friendly crypto education platform.
 </p>
 
-<p>
+<p align="center">
   <a href="https://crypto-x-virid.vercel.app/">
-    <img src="https://img.shields.io/badge/Live-Demo-black?style=for-the-badge" />
+    <img src="https://img.shields.io/badge/Live-Demo-black?style=for-the-badge" alt="Live Demo" />
   </a>
-  </p>
+</p>
+
 
 
 
