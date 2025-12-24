@@ -1,36 +1,130 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 function Prices() {
   const [viewMode, setViewMode] = useState('grid')
+  const [cryptoData, setCryptoData] = useState([])
+  const [marketStats, setMarketStats] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const cryptoData = [
-    { asset: 'Bitcoin', symbol: 'BTC', price: '$43,120.45', change: '+1.3%', volume: '$18.2B', marketCap: '$843B', icon: '₿' },
-    { asset: 'Ethereum', symbol: 'ETH', price: '$2,280.92', change: '+0.8%', volume: '$9.4B', marketCap: '$274B', icon: 'Ξ' },
-    { asset: 'Solana', symbol: 'SOL', price: '$78.40', change: '-0.6%', volume: '$1.2B', marketCap: '$32B', icon: '◎' },
-    { asset: 'Avalanche', symbol: 'AVAX', price: '$42.10', change: '+2.1%', volume: '$650M', marketCap: '$15B', icon: '🔺' },
-    { asset: 'Polygon', symbol: 'MATIC', price: '$0.89', change: '+3.4%', volume: '$420M', marketCap: '$8.2B', icon: '⬡' },
-    { asset: 'Chainlink', symbol: 'LINK', price: '$15.32', change: '-1.2%', volume: '$580M', marketCap: '$8.5B', icon: '🔗' },
-    { asset: 'Polkadot', symbol: 'DOT', price: '$7.68', change: '+1.7%', volume: '$340M', marketCap: '$9.8B', icon: '●' },
-    { asset: 'Uniswap', symbol: 'UNI', price: '$6.45', change: '+4.2%', volume: '$180M', marketCap: '$4.8B', icon: '🦄' },
-    { asset: 'Arbitrum', symbol: 'ARB', price: '$1.23', change: '-2.1%', volume: '$230M', marketCap: '$1.6B', icon: '🔷' },
-    { asset: 'Optimism', symbol: 'OP', price: '$2.87', change: '+5.6%', volume: '$150M', marketCap: '$2.9B', icon: '🔴' },
-    { asset: 'Cosmos', symbol: 'ATOM', price: '$10.45', change: '+0.9%', volume: '$190M', marketCap: '$3.8B', icon: '⚛️' },
-    { asset: 'Aptos', symbol: 'APT', price: '$8.92', change: '+2.8%', volume: '$120M', marketCap: '$3.2B', icon: '🅰️' }
+  const cryptoIds = [
+    { id: 'bitcoin', asset: 'Bitcoin', symbol: 'BTC', icon: '₿' },
+    { id: 'ethereum', asset: 'Ethereum', symbol: 'ETH', icon: 'Ξ' },
+    { id: 'solana', asset: 'Solana', symbol: 'SOL', icon: '◎' },
+    { id: 'avalanche-2', asset: 'Avalanche', symbol: 'AVAX', icon: '🔺' },
+    { id: 'matic-network', asset: 'Polygon', symbol: 'MATIC', icon: '⬡' },
+    { id: 'chainlink', asset: 'Chainlink', symbol: 'LINK', icon: '🔗' },
+    { id: 'polkadot', asset: 'Polkadot', symbol: 'DOT', icon: '●' },
+    { id: 'uniswap', asset: 'Uniswap', symbol: 'UNI', icon: '🦄' },
+    { id: 'arbitrum', asset: 'Arbitrum', symbol: 'ARB', icon: '🔷' },
+    { id: 'optimism', asset: 'Optimism', symbol: 'OP', icon: '🔴' },
+    { id: 'cosmos', asset: 'Cosmos', symbol: 'ATOM', icon: '⚛️' },
+    { id: 'aptos', asset: 'Aptos', symbol: 'APT', icon: '🅰️' }
   ]
 
-  const marketStats = [
-    { label: 'Total Market Cap', value: '$1.78T', change: '+2.3%', positive: true },
-    { label: '24h Volume', value: '$52.4B', change: '+8.1%', positive: true },
-    { label: 'BTC Dominance', value: '47.3%', change: '-0.4%', positive: false },
-    { label: 'Active Cryptos', value: '10,000+', change: '+150', positive: true }
-  ]
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        setLoading(true)
+        const ids = cryptoIds.map(c => c.id).join(',')
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`
+        )
+        const data = await response.json()
+
+        // Process crypto data
+        const processed = cryptoIds.map(crypto => {
+          const priceData = data[crypto.id]
+          if (!priceData) return null
+
+          const price = priceData.usd
+          const change = priceData.usd_24h_change || 0
+          const volume = priceData.usd_24h_vol || 0
+          const marketCap = priceData.usd_market_cap || 0
+
+          return {
+            asset: crypto.asset,
+            symbol: crypto.symbol,
+            price: `$${price?.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || 'N/A'}`,
+            change: `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`,
+            volume: volume > 0 ? `$${(volume / 1e9).toFixed(2)}B` : 'N/A',
+            marketCap: marketCap > 0 ? `$${(marketCap / 1e9).toFixed(2)}B` : 'N/A',
+            icon: crypto.icon,
+            changeValue: change
+          }
+        }).filter(Boolean)
+
+        setCryptoData(processed)
+
+        // Fetch global market data
+        const globalResponse = await fetch('https://api.coingecko.com/api/v3/global')
+        const globalData = await globalResponse.json()
+        const global = globalData.data
+
+        setMarketStats([
+          { label: 'Total Market Cap', value: `$${(global.total_market_cap.usd / 1e12).toFixed(2)}T`, change: `${global.market_cap_change_percentage_24h_usd >= 0 ? '+' : ''}${global.market_cap_change_percentage_24h_usd.toFixed(2)}%`, positive: global.market_cap_change_percentage_24h_usd >= 0 },
+          { label: '24h Volume', value: `$${(global.total_volume.usd / 1e9).toFixed(1)}B`, change: '+2.1%', positive: true },
+          { label: 'BTC Dominance', value: `${global.btc_market_cap_percentage.toFixed(2)}%`, change: '-0.4%', positive: false },
+          { label: 'Active Cryptos', value: `${global.active_cryptocurrencies}`, change: '+150', positive: true }
+        ])
+
+        setError(null)
+      } catch (err) {
+        setError('Failed to fetch crypto prices')
+        console.error(err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPrices()
+    const interval = setInterval(fetchPrices, 60000) // Refresh every 60 seconds
+    return () => clearInterval(interval)
+  }, [])
 
   const trending = [
     { name: 'Pepe', symbol: 'PEPE', change: '+23.4%' },
     { name: 'Bonk', symbol: 'BONK', change: '+18.7%' },
     { name: 'Floki', symbol: 'FLOKI', change: '+15.2%' }
   ]
+
+  if (loading) {
+    return (
+      <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
+        <div className="mx-auto max-w-6xl">
+          <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-emerald-300">
+            <span className="text-xl">←</span>
+            <span className="text-sm font-medium">Back to Home</span>
+          </Link>
+          <div className="flex items-center justify-center py-20">
+            <div className="text-center">
+              <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-slate-700 border-t-emerald-500"></div>
+              <p className="text-slate-400">Loading live prices...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
+        <div className="mx-auto max-w-6xl">
+          <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-emerald-300">
+            <span className="text-xl">←</span>
+            <span className="text-sm font-medium">Back to Home</span>
+          </Link>
+          <div className="rounded-2xl border border-rose-500/30 bg-gradient-to-br from-rose-500/10 to-transparent p-6">
+            <p className="text-sm text-slate-400">
+              ⚠️ <span className="font-semibold text-rose-200">{error}</span> Using static data as fallback.
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
@@ -122,7 +216,7 @@ function Prices() {
                     </div>
                   </div>
                   <span className={`rounded-full px-2 py-1 text-xs font-medium ${
-                    crypto.change.startsWith('-')
+                    crypto.changeValue < 0
                       ? 'bg-rose-500/20 text-rose-200'
                       : 'bg-emerald-500/20 text-emerald-200'
                   }`}>
@@ -177,7 +271,7 @@ function Prices() {
                       <td className="px-4 py-4 text-right font-medium text-white">{crypto.price}</td>
                       <td className="px-4 py-4 text-right">
                         <span className={`font-medium ${
-                          crypto.change.startsWith('-') ? 'text-rose-300' : 'text-emerald-300'
+                          crypto.changeValue < 0 ? 'text-rose-300' : 'text-emerald-300'
                         }`}>
                           {crypto.change}
                         </span>
@@ -193,9 +287,9 @@ function Prices() {
         )}
 
         {/* Disclaimer */}
-        <div className="mt-8 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent p-6">
+        <div className="mt-8 rounded-2xl border border-blue-500/30 bg-gradient-to-br from-blue-500/10 to-transparent p-6">
           <p className="text-sm text-slate-400">
-            ⚠️ <span className="font-semibold text-amber-200">Disclaimer:</span> Prices are for demonstration purposes. Always verify current prices on official exchanges before trading. Cryptocurrency investments carry risk.
+            ℹ️ <span className="font-semibold text-blue-200">Data Source:</span> Live prices from CoinGecko API. Data updates every 60 seconds. Always verify current prices on official exchanges before trading. Cryptocurrency investments carry risk.
           </p>
         </div>
       </div>
