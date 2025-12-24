@@ -681,15 +681,15 @@ function Guides() {
 
         {/* Stats */}
         <div className="mb-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-sky-500/10 to-transparent p-6">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-sky-500/10 to-transparent p-6">
             <p className="text-3xl font-bold text-white">{guides.length}</p>
             <p className="text-sm text-slate-400">Total Guides</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-emerald-500/10 to-transparent p-6">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-emerald-500/10 to-transparent p-6">
             <p className="text-3xl font-bold text-white">4</p>
             <p className="text-sm text-slate-400">Categories</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-purple-500/10 to-transparent p-6">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-purple-500/10 to-transparent p-6">
             <p className="text-3xl font-bold text-white">100%</p>
             <p className="text-sm text-slate-400">Free Access</p>
           </div>
@@ -733,7 +733,7 @@ function Guides() {
         )}
 
         {/* CTA */}
-        <div className="mt-12 rounded-2xl border border-sky-500/30 bg-gradient-to-br from-sky-500/10 to-transparent p-8 text-center">
+        <div className="mt-12 rounded-2xl border border-sky-500/30 bg-linear-to-br from-sky-500/10 to-transparent p-8 text-center">
           <h3 className="mb-2 text-2xl font-bold text-white">Need Help?</h3>
           <p className="mb-4 text-slate-300">Join our community or test your knowledge</p>
           <Link to="/quiz" className="inline-flex rounded-full bg-sky-500 px-6 py-3 font-semibold text-white shadow-lg shadow-sky-500/30 transition hover:scale-[1.02]">

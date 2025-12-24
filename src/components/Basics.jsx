@@ -5,29 +5,35 @@ import useScrollAnimation from '../hooks/useScrollAnimation'
 
 function Basics() {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [headerRef, headerVisible] = useScrollAnimation()
   const [cardsRef, cardsVisible] = useScrollAnimation()
   const [selectedLesson, setSelectedLesson] = useState(null)
   
   const openLesson = (lesson) => {
     setSelectedLesson(lesson)
-    document.body.style.overflow = 'hidden' // Prevent background scroll
   }
   
   const closeLesson = () => {
     setSelectedLesson(null)
-    document.body.style.overflow = 'auto' // Restore scroll
   }
   
-  // Close modal on escape key
+  // Close modal on escape key and manage body overflow
   useEffect(() => {
+    if (selectedLesson) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+    
     const handleEscape = (e) => {
       if (e.key === 'Escape' && selectedLesson) {
         closeLesson()
       }
     }
     window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
+    return () => {
+      window.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'auto'
+    }
   }, [selectedLesson])
   
   const categories = ['All', 'Foundations', 'Networks', 'Trading', 'Security', 'DeFi', 'NFTs']
@@ -79,15 +85,15 @@ function Basics() {
 
         {/* Stats */}
         <div className="mb-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-emerald-500/10 to-transparent p-6">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-emerald-500/10 to-transparent p-6">
             <p className="text-3xl font-bold text-white">{basicsContent.length}</p>
             <p className="text-sm text-slate-400">Total Lessons</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-cyan-500/10 to-transparent p-6">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-cyan-500/10 to-transparent p-6">
             <p className="text-3xl font-bold text-white">{categories.length - 1}</p>
             <p className="text-sm text-slate-400">Categories</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/10 to-transparent p-6">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-blue-500/10 to-transparent p-6">
             <p className="text-3xl font-bold text-white">Free</p>
             <p className="text-sm text-slate-400">Forever</p>
           </div>
