@@ -83,27 +83,33 @@ body {
 /* Animation Utilities */
 @layer utilities {
   .animate-fadeInUp {
-    animation: fadeInUp 0.4s ease-out forwards;
+    animation: fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
   }
   
   .animate-fadeInDown {
-    animation: fadeInDown 0.3s ease-out forwards;
+    animation: fadeInDown 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
   }
   
   .animate-fadeIn {
-    animation: fadeIn 0.3s ease-out forwards;
+    animation: fadeIn 0.25s ease-out forwards;
+    will-change: opacity;
   }
   
   .animate-slideDown {
-    animation: slideDown 0.3s ease-out forwards;
+    animation: slideDown 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
   }
   
   .animate-scaleIn {
-    animation: scaleIn 0.3s ease-out forwards;
+    animation: scaleIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
   }
   
   .animate-slideUp {
-    animation: slideUp 0.4s ease-out forwards;
+    animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
   }
   
   .animate-delay-100 {
@@ -170,4 +176,45 @@ body {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Mobile Animation Optimizations (<= 430px width) */
+@media (max-width: 430px) {
+  /* Use shorter durations and smaller travel distance on mobile */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.99); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .animate-fadeInUp { animation-duration: 0.22s; }
+  .animate-slideUp { animation-duration: 0.24s; }
+  .animate-scaleIn { animation-duration: 0.20s; }
+  .animate-fadeIn { animation-duration: 0.16s; }
+  .animate-slideDown { animation-duration: 0.22s; }
+
+  /* Soften stagger/reveal transitions */
+  .reveal,
+  .stagger-item {
+    transform: translateY(8px);
+    transition-duration: 0.22s;
+  }
+
+  /* Reduce animation delays to feel snappier */
+  .animate-delay-100 { animation-delay: 50ms; }
+  .animate-delay-200 { animation-delay: 100ms; }
+  .animate-delay-300 { animation-delay: 150ms; }
+  .animate-delay-400 { animation-delay: 200ms; }
+  .animate-delay-500 { animation-delay: 250ms; }
 }

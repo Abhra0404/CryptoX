@@ -12,6 +12,15 @@ function useScrollAnimation({ threshold = 0.15, rootMargin = '0px' } = {}) {
       return
     }
 
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    const isMobile = window.matchMedia?.('(max-width: 430px)').matches
+
+    // If user prefers reduced motion, reveal immediately without animating
+    if (prefersReduced) {
+      setIsVisible(true)
+      return
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isVisible) {
@@ -19,7 +28,11 @@ function useScrollAnimation({ threshold = 0.15, rootMargin = '0px' } = {}) {
           observer.unobserve(element) // Only trigger once
         }
       },
-      { threshold, rootMargin }
+      {
+        // On mobile, reveal earlier for snappier appearance
+        threshold: isMobile ? Math.min(threshold, 0.06) : threshold,
+        rootMargin: isMobile ? '0px 0px -20%' : rootMargin
+      }
     )
 
     observer.observe(element)

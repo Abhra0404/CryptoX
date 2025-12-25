@@ -650,25 +650,25 @@ function Guides() {
 
   return (
     <>
-      <section className={`min-h-screen bg-slate-950 px-6 py-14 text-slate-100 transition-all duration-300 ${selectedGuide ? 'blur-sm' : ''}`}>
+      <section className={`min-h-screen bg-slate-950 px-4 py-10 sm:px-6 sm:py-14 text-slate-100 transition-all duration-300 ${selectedGuide ? 'blur-sm' : ''}`}>
         <div className="mx-auto max-w-6xl">
         <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-sky-300">
           <span className="text-xl">←</span>
-          <span className="text-sm font-medium">Back to Home</span>
+          <span className="text-xs sm:text-sm font-medium">Back to Home</span>
         </Link>
-        <div className="mb-8">
-          <p className="text-sm uppercase tracking-[0.16em] text-sky-200">📖 Guided paths</p>
-          <h2 className="mt-2 text-4xl font-bold">Step-by-Step Guides</h2>
-          <p className="mt-2 text-lg text-slate-400">Follow detailed walkthroughs to master crypto operations safely.</p>
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-sky-200">📖 Guided paths</p>
+          <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold">Step-by-Step Guides</h2>
+          <p className="mt-2 text-sm sm:text-lg text-slate-400">Follow detailed walkthroughs to master crypto operations safely.</p>
         </div>
 
         {/* Difficulty Filter */}
-        <div className="mb-8 flex flex-wrap gap-3">
+        <div className="mb-6 sm:mb-8 flex flex-wrap gap-2 sm:gap-3">
           {difficulties.map(diff => (
             <button
               key={diff}
               onClick={() => setSelectedDifficulty(diff)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition ${
                 selectedDifficulty === diff
                   ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/30'
                   : 'border border-white/20 bg-white/5 text-slate-300 hover:border-white/40 hover:bg-white/10'
@@ -680,44 +680,44 @@ function Guides() {
         </div>
 
         {/* Stats */}
-        <div className="mb-8 grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-sky-500/10 to-transparent p-6">
-            <p className="text-3xl font-bold text-white">{guides.length}</p>
-            <p className="text-sm text-slate-400">Total Guides</p>
+        <div className="mb-6 sm:mb-8 grid gap-3 sm:gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-sky-500/10 to-transparent p-4 sm:p-6">
+            <p className="text-2xl sm:text-3xl font-bold text-white">{guides.length}</p>
+            <p className="text-xs sm:text-sm text-slate-400">Total Guides</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-emerald-500/10 to-transparent p-6">
-            <p className="text-3xl font-bold text-white">4</p>
-            <p className="text-sm text-slate-400">Categories</p>
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-emerald-500/10 to-transparent p-4 sm:p-6">
+            <p className="text-2xl sm:text-3xl font-bold text-white">4</p>
+            <p className="text-xs sm:text-sm text-slate-400">Categories</p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-purple-500/10 to-transparent p-6">
-            <p className="text-3xl font-bold text-white">100%</p>
-            <p className="text-sm text-slate-400">Free Access</p>
+          <div className="rounded-2xl border border-white/10 bg-linear-to-br from-purple-500/10 to-transparent p-4 sm:p-6">
+            <p className="text-2xl sm:text-3xl font-bold text-white">100%</p>
+            <p className="text-xs sm:text-sm text-slate-400">Free Access</p>
           </div>
         </div>
 
         {/* Guides Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredGuides.map((guide, idx) => (
             <article 
               key={idx}
-              className="group rounded-2xl border border-white/10 bg-slate-900/60 p-6 transition hover:border-sky-400/40 hover:shadow-lg hover:shadow-sky-500/10 hover:-translate-y-1"
+              className="group rounded-2xl border border-white/10 bg-slate-900/60 p-4 sm:p-6 transition hover:border-sky-400/40 hover:shadow-lg hover:shadow-sky-500/10 hover:-translate-y-1"
             >
-              <div className="mb-4 flex items-start justify-between">
-                <span className="text-4xl">{guide.icon}</span>
-                <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${getDifficultyColor(guide.difficulty)}`}>
+              <div className="mb-4 flex items-start justify-between gap-2">
+                <span className="text-3xl sm:text-4xl">{guide.icon}</span>
+                <span className={`rounded-full px-2 py-0.5 text-xs font-medium whitespace-nowrap ${getDifficultyColor(guide.difficulty)}`}>
                   {guide.difficulty}
                 </span>
               </div>
               <p className="mb-2 text-xs uppercase tracking-wider text-sky-200">{guide.category}</p>
-              <h3 className="mb-2 text-xl font-semibold text-white group-hover:text-sky-300">{guide.title}</h3>
-              <p className="mb-4 text-sm text-slate-300">{guide.copy}</p>
-              <div className="mb-4 flex items-center gap-4 text-xs text-slate-400">
+              <h3 className="mb-2 text-lg sm:text-xl font-semibold text-white group-hover:text-sky-300">{guide.title}</h3>
+              <p className="mb-4 text-xs sm:text-sm text-slate-300">{guide.copy}</p>
+              <div className="mb-4 flex flex-wrap items-center gap-2 sm:gap-4 text-xs text-slate-400">
                 <span>⏱️ {guide.length}</span>
                 <span>📝 {guide.steps.length} steps</span>
               </div>
               <button 
                 onClick={() => openGuide(guide)}
-                className="flex cursor-pointer items-center gap-2 text-sm font-medium text-sky-400 transition hover:text-sky-300"
+                className="flex cursor-pointer items-center gap-2 text-xs sm:text-sm font-medium text-sky-400 transition hover:text-sky-300"
               >
                 Start guide
                 <span className="transition-transform group-hover:translate-x-1">→</span>
@@ -727,8 +727,8 @@ function Guides() {
         </div>
 
         {filteredGuides.length === 0 && (
-          <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-12 text-center">
-            <p className="text-slate-400">No guides found for this difficulty level.</p>
+          <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 sm:p-12 text-center">
+            <p className="text-xs sm:text-sm text-slate-400">No guides found for this difficulty level.</p>
           </div>
         )}
 
@@ -753,29 +753,29 @@ function Guides() {
         ></div>
 
         {/* Modal Content */}
-        <div className="relative z-10 max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-3xl border border-white/20 bg-slate-900 shadow-2xl shadow-sky-500/20 animate-slideUp">
+        <div className="relative z-10 max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-t-3xl sm:rounded-3xl border border-white/20 bg-slate-900 shadow-2xl shadow-sky-500/20 animate-slideUp">
           {/* Header */}
-          <div className="sticky top-0 z-20 border-b border-white/10 bg-slate-900/95 backdrop-blur-sm px-6 py-4 md:px-8 md:py-6">
-            <div className="mb-3 flex items-start justify-between">
-              <div className="flex flex-1 items-start gap-4">
-                <span className="text-5xl">{selectedGuide.icon}</span>
-                <div className="flex-1">
+          <div className="sticky top-0 z-20 border-b border-white/10 bg-slate-900/95 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-6">
+            <div className="mb-3 flex flex-col sm:flex-row items-start justify-between gap-3 sm:gap-4">
+              <div className="flex flex-1 items-start gap-3 sm:gap-4">
+                <span className="text-4xl sm:text-5xl shrink-0">{selectedGuide.icon}</span>
+                <div className="flex-1 min-w-0">
                   <p className="text-xs uppercase tracking-[0.12em] text-sky-200">{selectedGuide.category}</p>
-                  <h2 className="mt-2 text-2xl font-bold text-white md:text-3xl">{selectedGuide.title}</h2>
-                  <p className="mt-2 text-sm text-slate-300">{selectedGuide.copy}</p>
+                  <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold text-white">{selectedGuide.title}</h2>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-300">{selectedGuide.copy}</p>
                 </div>
               </div>
               <button 
                 onClick={closeGuide}
-                className="ml-4 flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-slate-800/60 text-slate-300 transition hover:border-white/20 hover:bg-slate-800 hover:text-white"
+                className="ml-auto flex h-9 sm:h-10 w-9 sm:w-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-slate-800/60 text-slate-300 transition hover:border-white/20 hover:bg-slate-800 hover:text-white"
                 aria-label="Close"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-4 sm:h-5 w-4 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               <span className={`rounded-full px-3 py-1 text-xs font-medium ${getDifficultyColor(selectedGuide.difficulty)}`}>
                 {selectedGuide.difficulty}
               </span>
@@ -789,29 +789,29 @@ function Guides() {
           </div>
 
           {/* Content */}
-          <div className="space-y-8 px-6 py-8 md:px-8">
+          <div className="space-y-6 sm:space-y-8 px-4 sm:px-6 md:px-8 py-6 sm:py-8">
             {/* Description */}
-            <div className="rounded-xl border border-white/5 bg-slate-800/40 p-6">
-              <p className="leading-relaxed text-slate-200">{selectedGuide.description}</p>
+            <div className="rounded-xl border border-white/5 bg-slate-800/40 p-4 sm:p-6">
+              <p className="text-sm sm:text-base leading-relaxed text-slate-200">{selectedGuide.description}</p>
             </div>
 
             {/* Steps */}
             <div>
-              <h3 className="mb-6 flex items-center gap-2 text-lg font-semibold text-sky-300">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <h3 className="mb-4 sm:mb-6 flex items-center gap-2 text-base sm:text-lg font-semibold text-sky-300">
+                <svg className="h-5 sm:h-6 w-5 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                 </svg>
                 Step-by-Step Instructions
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {selectedGuide.steps.map((step, i) => (
-                  <div key={i} className="flex gap-4 rounded-xl border border-white/5 bg-slate-800/30 p-5 transition hover:border-sky-500/30 hover:bg-slate-800/50">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-500 text-sm font-bold text-white">
+                  <div key={i} className="flex gap-3 sm:gap-4 rounded-xl border border-white/5 bg-slate-800/30 p-4 sm:p-5 transition hover:border-sky-500/30 hover:bg-slate-800/50">
+                    <div className="flex h-7 sm:h-8 w-7 sm:w-8 shrink-0 items-center justify-center rounded-full bg-sky-500 text-xs sm:text-sm font-bold text-white">
                       {step.number}
                     </div>
-                    <div className="flex-1">
-                      <h4 className="mb-2 font-semibold text-white">{step.title}</h4>
-                      <p className="text-sm leading-relaxed text-slate-300">{step.detail}</p>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="mb-1 sm:mb-2 text-sm sm:text-base font-semibold text-white">{step.title}</h4>
+                      <p className="text-xs sm:text-sm leading-relaxed text-slate-300">{step.detail}</p>
                     </div>
                   </div>
                 ))}
@@ -819,16 +819,16 @@ function Guides() {
             </div>
 
             {/* Tips */}
-            <div className="rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-6">
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-300">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-4 sm:p-6">
+              <h3 className="mb-3 sm:mb-4 flex items-center gap-2 text-base sm:text-lg font-semibold text-emerald-300">
+                <svg className="h-5 sm:h-6 w-5 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                 </svg>
                 Pro Tips
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3">
                 {selectedGuide.tips.map((tip, i) => (
-                  <li key={i} className="flex gap-3 text-sm text-emerald-100">
+                  <li key={i} className="flex gap-2 sm:gap-3 text-xs sm:text-sm text-emerald-100">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400"></span>
                     <span className="leading-relaxed">{tip}</span>
                   </li>
@@ -837,14 +837,14 @@ function Guides() {
             </div>
 
             {/* Warning */}
-            <div className="rounded-xl border border-red-500/20 bg-red-950/20 p-6">
-              <h3 className="mb-3 flex items-center gap-2 text-lg font-semibold text-red-300">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="rounded-xl border border-red-500/20 bg-red-950/20 p-4 sm:p-6">
+              <h3 className="mb-2 sm:mb-3 flex items-center gap-2 text-base sm:text-lg font-semibold text-red-300">
+                <svg className="h-5 sm:h-6 w-5 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 Important Warning
               </h3>
-              <p className="font-medium leading-relaxed text-red-100">{selectedGuide.warning}</p>
+              <p className="text-xs sm:text-sm font-medium leading-relaxed text-red-100">{selectedGuide.warning}</p>
             </div>
 
             {/* Close Button */}

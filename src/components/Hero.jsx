@@ -19,7 +19,7 @@ function Hero() {
               <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-300" />
               🚀 Join 50,000+ crypto learners
             </p>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight opacity-0 animate-fadeInUp animate-delay-200">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight opacity-0 animate-fadeInUp animate-delay-200">
               Master Crypto
               <span className="block bg-gradient-to-r from-emerald-300 via-cyan-300 to-blue-400 bg-clip-text text-transparent">
                 From Zero to Hero
@@ -28,12 +28,12 @@ function Hero() {
             <p className="max-w-2xl text-base sm:text-lg md:text-xl text-slate-300 opacity-0 animate-fadeInUp animate-delay-300">
               Learn blockchain fundamentals, stay safe from scams, trade with confidence, and build your crypto portfolio with expert guidance.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-4 opacity-0 animate-fadeInUp animate-delay-400">
-              <Link className="group text-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 text-sm sm:text-base font-semibold text-white shadow-lg shadow-emerald-500/50 transition-all duration-200 hover:scale-105 hover:shadow-emerald-500/70" to="/basics">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 opacity-0 animate-fadeInUp animate-delay-400">
+              <Link className="group text-center rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 min-h-[44px] text-sm sm:text-base font-semibold text-white shadow-lg shadow-emerald-500/50 transition-all duration-200 hover:scale-105 hover:shadow-emerald-500/70" to="/basics">
                 Start Learning Free
                 <span className="ml-2 inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
               </Link>
-              <Link className="text-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm sm:text-base font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:scale-105" to="/quiz">
+              <Link className="text-center rounded-full border border-white/20 bg-white/5 px-6 py-3 min-h-[44px] text-sm sm:text-base font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/40 hover:bg-white/10 hover:scale-105" to="/quiz">
                 Test Your Knowledge
               </Link>
             </div>
@@ -217,11 +217,11 @@ function Hero() {
         <div className={`mx-auto max-w-4xl rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 via-cyan-500/5 to-blue-500/10 p-6 sm:p-8 md:p-12 text-center shadow-2xl shadow-emerald-500/20 transition-all duration-500 ${ctaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="mb-4 text-2xl sm:text-3xl md:text-4xl font-bold text-white">Ready to Start Your Crypto Journey?</h2>
           <p className="mb-6 sm:mb-8 text-base sm:text-lg md:text-xl text-slate-300">Join thousands of learners mastering crypto today</p>
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
-            <Link className="rounded-full bg-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-semibold text-slate-950 shadow-lg shadow-white/30 transition-all duration-200 hover:scale-105 hover:shadow-white/50" to="/basics">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+            <Link className="rounded-full bg-white px-6 sm:px-8 py-3 sm:py-4 min-h-[44px] text-sm sm:text-base md:text-lg font-semibold text-slate-950 shadow-lg shadow-white/30 transition-all duration-200 hover:scale-105 hover:shadow-white/50" to="/basics">
               Get Started Free
             </Link>
-            <Link className="rounded-full border border-white/30 bg-white/5 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/50 hover:bg-white/10 hover:scale-105" to="/guides">
+            <Link className="rounded-full border border-white/30 bg-white/5 px-6 sm:px-8 py-3 sm:py-4 min-h-[44px] text-sm sm:text-base md:text-lg font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/50 hover:bg-white/10 hover:scale-105" to="/guides">
               View All Guides
             </Link>
           </div>

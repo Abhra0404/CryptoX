@@ -48,36 +48,36 @@ function Glossary() {
   })
 
   return (
-    <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
+    <section className="min-h-screen bg-slate-950 px-4 py-10 sm:px-6 sm:py-14 text-slate-100">
       <div className="mx-auto max-w-6xl">
         <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-violet-300">
           <span className="text-xl">←</span>
           <span className="text-sm font-medium">Back to Home</span>
         </Link>
-        <div className="mb-8">
-          <p className="text-sm uppercase tracking-[0.16em] text-violet-200">📚 Glossary</p>
-          <h2 className="mt-2 text-4xl font-bold">Crypto Terminology</h2>
-          <p className="mt-2 text-lg text-slate-400">Master the language of cryptocurrency with our comprehensive glossary.</p>
+        <div className="mb-6 sm:mb-8">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-violet-200">📚 Glossary</p>
+          <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold">Crypto Terminology</h2>
+          <p className="mt-2 text-sm sm:text-lg text-slate-400">Master the language of cryptocurrency with our comprehensive glossary.</p>
         </div>
 
         {/* Search Bar */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <input
             type="text"
             placeholder="Search terms..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-2xl border border-white/20 bg-slate-900/60 px-6 py-4 text-white placeholder-slate-400 focus:border-violet-400/40 focus:outline-none focus:ring-2 focus:ring-violet-500/20"
+            className="w-full rounded-2xl border border-white/20 bg-slate-900/60 px-5 sm:px-6 py-3 sm:py-4 text-sm sm:text-base text-white placeholder-slate-400 focus:border-violet-400/40 focus:outline-none focus:ring-2 focus:ring-violet-500/20"
           />
         </div>
 
         {/* Category Filter */}
-        <div className="mb-8 flex flex-wrap gap-3">
+        <div className="mb-6 sm:mb-8 flex flex-wrap gap-2 sm:gap-3">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+              className={`rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition ${
                 selectedCategory === cat
                   ? 'bg-violet-500 text-white shadow-lg shadow-violet-500/30'
                   : 'border border-white/20 bg-white/5 text-slate-300 hover:border-white/40 hover:bg-white/10'
@@ -89,39 +89,39 @@ function Glossary() {
         </div>
 
         {/* Stats */}
-        <div className="mb-8 grid gap-4 md:grid-cols-3">
+        <div className="mb-6 sm:mb-8 grid gap-3 sm:gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-violet-500/10 to-transparent p-6">
-            <p className="text-3xl font-bold text-white">{terms.length}</p>
-            <p className="text-sm text-slate-400">Total Terms</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white">{terms.length}</p>
+            <p className="text-xs sm:text-sm text-slate-400">Total Terms</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-purple-500/10 to-transparent p-6">
-            <p className="text-3xl font-bold text-white">{categories.length - 1}</p>
-            <p className="text-sm text-slate-400">Categories</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white">{categories.length - 1}</p>
+            <p className="text-xs sm:text-sm text-slate-400">Categories</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-pink-500/10 to-transparent p-6">
-            <p className="text-3xl font-bold text-white">{filteredTerms.length}</p>
-            <p className="text-sm text-slate-400">Results Found</p>
+            <p className="text-2xl sm:text-3xl font-bold text-white">{filteredTerms.length}</p>
+            <p className="text-xs sm:text-sm text-slate-400">Results Found</p>
           </div>
         </div>
 
         {/* Terms Grid */}
-        <dl className="grid gap-6 md:grid-cols-2">
+        <dl className="grid gap-4 sm:gap-6 md:grid-cols-2">
           {filteredTerms.map((entry, idx) => (
             <div 
               key={idx} 
-              className="group rounded-2xl border border-white/10 bg-slate-900/60 p-6 transition hover:border-violet-400/40 hover:shadow-lg hover:shadow-violet-500/10"
+              className="group rounded-2xl border border-white/10 bg-slate-900/60 p-4 sm:p-6 transition hover:border-violet-400/40 hover:shadow-lg hover:shadow-violet-500/10"
             >
-              <div className="mb-3 flex items-start justify-between">
-                <dt className="text-xl font-semibold text-white group-hover:text-violet-300">{entry.term}</dt>
+              <div className="mb-3 flex items-start justify-between gap-2">
+                <dt className="text-lg sm:text-xl font-semibold text-white group-hover:text-violet-300">{entry.term}</dt>
                 <span className="rounded-full bg-violet-500/20 px-2 py-0.5 text-xs font-medium text-violet-200">
                   {entry.category}
                 </span>
               </div>
-              <dd className="mb-3 text-sm text-slate-300">{entry.def}</dd>
+              <dd className="mb-3 text-xs sm:text-sm text-slate-300">{entry.def}</dd>
               {entry.example && (
                 <div className="rounded-lg border border-white/10 bg-slate-900/40 p-3">
-                  <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-violet-200">Example:</p>
-                  <p className="text-xs text-slate-400">{entry.example}</p>
+                  <p className="mb-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-violet-200">Example:</p>
+                  <p className="text-[11px] sm:text-xs text-slate-400">{entry.example}</p>
                 </div>
               )}
             </div>
@@ -129,11 +129,11 @@ function Glossary() {
         </dl>
 
         {filteredTerms.length === 0 && (
-          <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-12 text-center">
-            <p className="text-slate-400">No terms found matching your search.</p>
+          <div className="rounded-2xl border border-white/10 bg-slate-900/40 p-6 sm:p-12 text-center">
+            <p className="text-xs sm:text-sm text-slate-400">No terms found matching your search.</p>
             <button 
               onClick={() => { setSearchTerm(''); setSelectedCategory('All') }}
-              className="mt-4 text-sm font-medium text-violet-400 hover:text-violet-300"
+              className="mt-4 text-xs sm:text-sm font-medium text-violet-400 hover:text-violet-300"
             >
               Clear filters
             </button>
@@ -141,10 +141,10 @@ function Glossary() {
         )}
 
         {/* CTA */}
-        <div className="mt-12 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-500/10 to-transparent p-8 text-center">
+        <div className="mt-10 sm:mt-12 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-500/10 to-transparent p-6 sm:p-8 text-center">
           <h3 className="mb-2 text-2xl font-bold text-white">Missing a Term?</h3>
-          <p className="mb-4 text-slate-300">Help us expand this glossary for the community</p>
-          <button className="inline-flex rounded-full bg-violet-500 px-6 py-3 font-semibold text-white shadow-lg shadow-violet-500/30 transition hover:scale-[1.02]">
+          <p className="mb-4 text-xs sm:text-sm text-slate-300">Help us expand this glossary for the community</p>
+          <button className="inline-flex rounded-full bg-violet-500 px-6 py-3 min-h-[44px] text-sm font-semibold text-white shadow-lg shadow-violet-500/30 transition hover:scale-[1.02]">
             Suggest a Term
           </button>
         </div>

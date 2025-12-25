@@ -140,21 +140,21 @@ function Quiz() {
   const totalPossible = totalAttempted * 3
 
   return (
-    <section className="min-h-screen bg-slate-950 px-6 py-14 text-slate-100">
+    <section className="min-h-screen bg-slate-950 px-4 py-10 sm:px-6 sm:py-14 text-slate-100">
       <div className="mx-auto max-w-4xl">
         <Link to="/" className="mb-6 inline-flex items-center gap-2 text-slate-400 transition hover:text-emerald-300">
           <span className="text-xl">←</span>
           <span className="text-sm font-medium">Back to Home</span>
         </Link>
-        <div className="mb-8 text-center">
-          <p className="text-sm uppercase tracking-[0.16em] text-emerald-200">🎯 Test yourself</p>
-          <h2 className="mt-2 text-4xl font-bold">Knowledge Quiz</h2>
-          <p className="mt-2 text-lg text-slate-400">Test your crypto knowledge across different topics</p>
+        <div className="mb-6 sm:mb-8 text-center">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.16em] text-emerald-200">🎯 Test yourself</p>
+          <h2 className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold">Knowledge Quiz</h2>
+          <p className="mt-2 text-sm sm:text-lg text-slate-400">Test your crypto knowledge across different topics</p>
         </div>
 
         {/* Overall Progress */}
         {totalAttempted > 0 && (
-          <div className="mb-8 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-transparent p-6">
+          <div className="mb-6 sm:mb-8 rounded-2xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/10 to-transparent p-4 sm:p-6">
             <h3 className="mb-4 text-xl font-semibold text-white">Your Overall Progress</h3>
             <div className="mb-2 flex justify-between text-sm">
               <span className="text-slate-400">Total Score</span>
@@ -180,21 +180,21 @@ function Quiz() {
         )}
 
         {/* Category Selection */}
-        <div className="mb-8">
+        <div className="mb-6 sm:mb-8">
           <h3 className="mb-4 text-lg font-semibold text-white">Choose a Category</h3>
-          <div className="grid gap-3 md:grid-cols-4">
+          <div className="grid gap-2 sm:gap-3 md:grid-cols-4">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => changeCategory(cat)}
                 disabled={showResult && cat === selectedCategory}
-                className={`rounded-xl border p-4 text-left transition ${
+                className={`rounded-xl border p-3 sm:p-4 text-left transition ${
                   selectedCategory === cat
                     ? 'border-emerald-400/40 bg-emerald-500/10 shadow-lg shadow-emerald-500/20'
                     : 'border-white/10 bg-slate-900/60 hover:border-white/30 hover:bg-slate-900/80'
                 } disabled:opacity-50`}
               >
-                <p className="mb-1 font-semibold text-white">{cat}</p>
+                <p className="mb-1 text-sm font-semibold text-white">{cat}</p>
                 <p className="text-xs text-slate-400">3 questions</p>
                 {categoryScores[cat] !== undefined && (
                   <p className="mt-2 text-xs font-medium text-emerald-300">
@@ -208,15 +208,15 @@ function Quiz() {
 
         {/* Quiz Content */}
         {showResult ? (
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-8 text-center">
+          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 sm:p-8 text-center">
             <div className="mb-6">
-              <p className="text-6xl mb-4">
+              <p className="text-5xl sm:text-6xl mb-4">
                 {score === currentQuestions.length ? '🎉' : score >= 2 ? '👏' : '📚'}
               </p>
-              <h3 className="mb-2 text-3xl font-bold text-white">
+              <h3 className="mb-2 text-2xl sm:text-3xl font-bold text-white">
                 {score === currentQuestions.length ? 'Perfect Score!' : score >= 2 ? 'Well Done!' : 'Keep Learning!'}
               </h3>
-              <p className="text-xl text-slate-300">
+              <p className="text-lg sm:text-xl text-slate-300">
                 You scored <span className="font-bold text-emerald-300">{score}</span> out of{' '}
                 <span className="font-bold text-white">{currentQuestions.length}</span>
               </p>
@@ -230,7 +230,7 @@ function Quiz() {
             <div className="flex flex-wrap justify-center gap-4">
               <button
                 onClick={resetQuiz}
-                className="rounded-full bg-emerald-500 px-6 py-3 font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]"
+                className="rounded-full bg-emerald-500 px-6 py-3 min-h-[44px] text-sm sm:text-base font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]"
               >
                 Try Again
               </button>
@@ -240,14 +240,14 @@ function Quiz() {
                   const nextCat = categories[(currentCatIndex + 1) % categories.length]
                   changeCategory(nextCat)
                 }}
-                className="rounded-full border border-white/20 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+                className="rounded-full border border-white/20 bg-white/5 px-6 py-3 min-h-[44px] text-sm sm:text-base font-semibold text-white transition hover:bg-white/10"
               >
                 Next Category
               </button>
             </div>
           </div>
         ) : (
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-8">
+          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 sm:p-8">
             {/* Progress Bar */}
             <div className="mb-6">
               <div className="mb-2 flex justify-between text-sm">
@@ -267,10 +267,10 @@ function Quiz() {
             </div>
 
             {/* Question */}
-            <h3 className="mb-6 text-2xl font-semibold text-white">{currentQuestion.question}</h3>
+            <h3 className="mb-4 sm:mb-6 text-xl sm:text-2xl font-semibold text-white">{currentQuestion.question}</h3>
 
             {/* Options */}
-            <ul className="mb-6 space-y-3">
+            <ul className="mb-6 space-y-2 sm:space-y-3">
               {currentQuestion.options.map((opt, idx) => {
                 const isCorrect = idx === currentQuestion.answer
                 const isSelected = idx === selected
@@ -280,7 +280,7 @@ function Quiz() {
                   <li
                     key={idx}
                     onClick={() => handleOptionSelect(idx)}
-                    className={`cursor-pointer rounded-xl border p-4 transition ${
+                    className={`cursor-pointer rounded-xl border p-3 sm:p-4 min-h-[44px] transition ${
                       showFeedback && isSelected
                         ? isCorrect
                           ? 'border-emerald-400 bg-emerald-500/20 text-white'
@@ -290,15 +290,15 @@ function Quiz() {
                         : 'border-white/10 bg-slate-900/40 hover:border-white/30 hover:bg-slate-900/60'
                     } ${selected !== null ? 'pointer-events-none' : ''}`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span>{opt}</span>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-sm">{opt}</span>
                       {showFeedback && isSelected && (
-                        <span className="text-2xl">
+                        <span className="text-xl sm:text-2xl">
                           {isCorrect ? '✓' : '✗'}
                         </span>
                       )}
                       {showFeedback && !isSelected && isCorrect && (
-                        <span className="text-2xl">✓</span>
+                        <span className="text-xl sm:text-2xl">✓</span>
                       )}
                     </div>
                   </li>
@@ -312,7 +312,7 @@ function Quiz() {
                 <p className="mb-1 text-sm font-semibold uppercase tracking-wider text-cyan-200">
                   Explanation:
                 </p>
-                <p className="text-sm text-slate-300">{currentQuestion.explanation}</p>
+                <p className="text-xs sm:text-sm text-slate-300">{currentQuestion.explanation}</p>
               </div>
             )}
 
@@ -320,7 +320,7 @@ function Quiz() {
             {selected !== null && (
               <button
                 onClick={handleNext}
-                className="w-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]"
+                className="w-full rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 min-h-[44px] text-sm sm:text-base font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:scale-[1.02]"
               >
                 {currentIdx + 1 < currentQuestions.length ? 'Next Question →' : 'See Results'}
               </button>

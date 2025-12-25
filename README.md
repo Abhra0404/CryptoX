@@ -153,5 +153,7 @@ feel free to use, modify, and build upon it.
 
 ---
 
-⭐ If you like this project, consider giving it a star — it helps a lot!
+
+> Stay focused, stay productive, and keep leveling up! — kaizenX out. ✌️
+
 
